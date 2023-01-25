@@ -20,16 +20,17 @@
 
 ## itemsテーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| product       | string     | null: false                    |
-| description   | text       | null: false                    |
-| category      | string     | null: false                    |
-| condition     | string     | null: false                    |
-| shipping_list | string     | null: false                    |
-| delivery_time | string     | null: false                    |
-| price         | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column           | Type        | Options                        |
+| ---------------- | ----------- | ------------------------------ |
+| product          | string      | null: false                    |
+| description      | text        | null: false                    |
+| category_id      | integer     | null: false                    |
+| condition_id     | integer     | null: false                    |
+| shipping_cost_id | integer     | null: false                    |
+| prefecture_id    | integer     | null: false                    |
+| delivery_time_id | integer     | null: false                    |
+| price            | integer     | null: false                    |
+| user             | references  | null: false, foreign_key: true |
 
 ### Association
 
@@ -39,11 +40,10 @@ has_one :purchase
 
 ## purchasesテーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| item_id    | references | null: false, foreign_key: true |
-| user_id    | references | null: false, foreign_key: true |
-| address_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| item   | references | null: false, foreign_key: true |
+| user   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -53,15 +53,15 @@ has_one :address
 
 ## addressesテーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| postalcode   | string     | null: false                    |
-| state        | string     | null: false                    |
-| city         | string     | null: false                    |
-| block        | string     | null: false                    |
-| building     | string     | null: false                    |
-| phone_number | string     | null: false                    |
-| purchase_id  | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postalcode    | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     | null: false                    |
+| phone_number  | string     | null: false                    |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
 
