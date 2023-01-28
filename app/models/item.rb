@@ -11,7 +11,6 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_time_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-  validates :user, presence: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
