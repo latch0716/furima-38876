@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :move_to_index, only: :edit
+  before_action :find_item, only: [:show, :edit, :update]
 
 
   def index
@@ -22,20 +23,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
-    if @item.user == current_user
-      @item = Item.find(params[:id])
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.user == current_user
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(params[:id])
     else
@@ -52,5 +46,9 @@ class ItemsController < ApplicationController
     unless user_signed_in?
       redirect_to action: :index
     end
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
   end
 end
