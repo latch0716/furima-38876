@@ -7,8 +7,8 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品' do
     context '商品が出品できるとき' do
-      it '全ての項目が存在するとき出品できる'do
-      expect(@item).to be_valid
+      it '全ての項目が存在するとき出品できる' do
+        expect(@item).to be_valid
       end
     end
     context '商品が出品できないとき' do
@@ -25,7 +25,7 @@ RSpec.describe Item, type: :model do
       it '商品名が41文字以上では出品できない' do
         @item.product = Faker::Name.initials(number: 41)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Product is too long (maximum is 40 characters)")
+        expect(@item.errors.full_messages).to include('Product is too long (maximum is 40 characters)')
       end
       it '商品の説明が空では出品できない' do
         @item.description = ''
@@ -35,7 +35,7 @@ RSpec.describe Item, type: :model do
       it '商品の説明が1001文字以上では出品できない' do
         @item.description = Faker::Lorem.characters(number: 1001)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description is too long (maximum is 1000 characters)")
+        expect(@item.errors.full_messages).to include('Description is too long (maximum is 1000 characters)')
       end
       it 'カテゴリーが未選択では出品できない' do
         @item.category_id = 1
@@ -70,22 +70,22 @@ RSpec.describe Item, type: :model do
       it '価格が半角数字以外では出品できない' do
         @item.price = 'テスト'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が300円未満では出品できない' do
         @item.price = Faker::Number.between(from: 1, to: 299)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格が10000000円以上では出品できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'userが紐付いていないと出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end

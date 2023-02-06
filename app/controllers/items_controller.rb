@@ -3,9 +3,8 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: :edit
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
-
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -23,11 +22,10 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    redirect_to root_path if @item.user != current_user || @item.purchase != nil
+    redirect_to root_path if @item.user != current_user || !@item.purchase.nil?
   end
 
   def update
@@ -44,14 +42,16 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
-    params.require(:item).permit(:product, :description, :category_id, :condition_id, :shipping_cost_id, :prefecture_id, :delivery_time_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:product, :description, :category_id, :condition_id, :shipping_cost_id, :prefecture_id,
+                                 :delivery_time_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
+    return if user_signed_in?
+
+    redirect_to action: :index
   end
 
   def find_item
