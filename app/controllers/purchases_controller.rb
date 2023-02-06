@@ -17,7 +17,6 @@ class PurchasesController < ApplicationController
       pay_item
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render 'index'
     end
   end
@@ -46,6 +45,6 @@ class PurchasesController < ApplicationController
   end
 
   def find_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 end
