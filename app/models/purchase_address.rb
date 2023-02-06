@@ -17,8 +17,8 @@ class PurchaseAddress
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
-
+    binding.pry
     Address.create(postalcode: postalcode, prefecture_id: prefecture_id, city: city, block: block, building: building,
-                   phone_number: phone_number, purchase: purchase)
+                   phone_number: phone_number, purchase_id: purchase.id)
   end
 end

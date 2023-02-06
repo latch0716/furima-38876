@@ -54,6 +54,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Postalcode is invalid. Include hyphen(-)")
       end
+      it '郵便番号が半角ハイフンを含む形でなければ購入できない' do
+        @purchase_address.postalcode = '1234567'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Postalcode is invalid. Include hyphen(-)")
+      end
       it '電話番号が9桁以下では購入できない' do
         @purchase_address.phone_number = '090123456'
         @purchase_address.valid?
