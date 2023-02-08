@@ -6,14 +6,14 @@ class PurchaseAddress
   with_options presence: true do
     validates :item_id
     validates :user_id
-    validates :postalcode, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :postalcode, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'をハイフン（-）をつけて入力してください' }
     validates :city
     validates :block
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
     validates :token
   end
 
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :prefecture_id, numericality: { other_than: 1, message: "を選択してください" }
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
