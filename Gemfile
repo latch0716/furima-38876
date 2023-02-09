@@ -62,6 +62,7 @@ group :development do
 end
 
 group :production do
+  gem 'pg', '1.4.5'
   gem 'unicorn', '5.4.1'
 end
 
